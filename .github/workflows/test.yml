@@ -1,0 +1,21 @@
+name: draft-release
+on:
+  pull_request:
+    types: [closed]
+jobs:
+  draft-release:
+    runs-on: ubuntu-18.04
+    if: github.event.pull_request.merged == true && github.base_ref == 'develop'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+      - name: Set up Node.js
+        uses: actions/setup-node@v1
+        with:
+        node-version: 17.x
+      - run: yarn install
+      - run: yarn build
+      - name: Push commit
+        uses: ad-m/github-push-action@master
+        with:
+          branch: "develop"
