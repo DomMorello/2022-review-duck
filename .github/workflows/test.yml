@@ -8,13 +8,13 @@ jobs:
     if: github.event.pull_request.merged == true && github.base_ref == 'develop'
     steps:
       - uses: actions/checkout@v3
-        with:
       - name: Set up Node.js
         uses: actions/setup-node@v1
         with:
-        node-version: 17.x
-      - run: yarn install
-      - run: yarn build
+          node-version: 17.x
+      - name: wow!
+        working-directory: ./frontend
+        run: yarn --versions --minor
       - name: Push commit
         uses: ad-m/github-push-action@master
         with:
